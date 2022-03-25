@@ -16,54 +16,32 @@ exports.FeeService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const fee_user_schemas_1 = require("../fee-user/schemas/fee-user.schemas");
-const user_schemas_1 = require("../user/schemas/user.schemas");
 const fee_schemas_1 = require("./schemas/fee.schemas");
 let FeeService = class FeeService {
-    constructor(feeModel, feeUserModel, userModel) {
+    constructor(feeModel) {
         this.feeModel = feeModel;
-        this.feeUserModel = feeUserModel;
-        this.userModel = userModel;
     }
-    async findAll() {
+    async find() {
         return this.feeModel.find();
     }
-    async findById(id) {
-        let fee = await this.feeModel.findById(id);
-        let feeUsers = await this.feeUserModel.find({ fee: fee === null || fee === void 0 ? void 0 : fee._id }).populate("user", "email username", "User");
-        return feeUsers;
-    }
-    async create(body) {
-        let fee = new this.feeModel({ title: body.title, time: body.time });
-        let users = await this.userModel.find({ status: 'Active' });
-        users.forEach(user => {
-            let feeUser = new this.feeUserModel({
-                user: user._id,
-                fee: fee._id
-            });
-            fee.feeUsers.push(feeUser._id);
-            feeUser.save();
-        });
+    async create(title, price) {
+        let fee = new this.feeModel({ title, price });
         return fee.save();
     }
-    async remove(id) {
-        let fee = await this.feeModel.findById(id);
-        return fee.remove();
+    async edit(id, price) {
+        let fee = await this.feeModel.findById(id.toString());
+        fee.price = price;
+        return fee.save();
     }
-    async pushFeeUser(feeId, feeUser) {
-        let fee = await this.feeModel.findById(feeId);
-        fee.feeUsers.push(feeUser);
-        fee.save();
+    async delete(id) {
+        let fee = await this.feeModel.findById(id.toString());
+        return fee.remove();
     }
 };
 FeeService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(fee_schemas_1.Fee.name)),
-    __param(1, (0, mongoose_1.InjectModel)(fee_user_schemas_1.FeeUser.name)),
-    __param(2, (0, mongoose_1.InjectModel)(user_schemas_1.User.name)),
-    __metadata("design:paramtypes", [mongoose_2.Model,
-        mongoose_2.Model,
-        mongoose_2.Model])
+    __metadata("design:paramtypes", [mongoose_2.Model])
 ], FeeService);
 exports.FeeService = FeeService;
 //# sourceMappingURL=fee.service.js.map

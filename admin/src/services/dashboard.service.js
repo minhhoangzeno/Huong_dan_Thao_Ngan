@@ -1,4 +1,4 @@
-import { publicGetApi } from '../apis/API';
+import { privateGetApi, publicGetApi } from '../apis/API';
 
 export const dashboardUser = async () => {
     let response = await publicGetApi('/user');
@@ -27,5 +27,11 @@ export const dashboardOrder = async () => {
 
 export const dashboardVoteUser = async () => {
     let response = await publicGetApi('/vote-user');
+    return response;
+};
+
+
+export const dashboardOrderByUser = async (userId) => {
+    let response = await privateGetApi(`/order/user/${userId}`)
     return response;
 };

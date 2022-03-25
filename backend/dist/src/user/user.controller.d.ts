@@ -22,4 +22,7 @@ export declare class UserController {
     updateUser(file: Express.Multer.File, body: any, req: any): Promise<import("./schemas/user.schemas").User & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;
+    roleUser(body: any): Promise<import("./schemas/user.schemas").User & import("mongoose").Document<any, any, any> & {
+        _id: any;
+    }>;
 }

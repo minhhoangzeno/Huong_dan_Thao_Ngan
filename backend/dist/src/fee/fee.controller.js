@@ -14,23 +14,22 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FeeController = void 0;
 const common_1 = require("@nestjs/common");
-const jwt_auth_guard_1 = require("../auth/guard/jwt-auth.guard");
 const fee_service_1 = require("./fee.service");
 let FeeController = class FeeController {
     constructor(feeService) {
         this.feeService = feeService;
     }
-    async findAll() {
-        return this.feeService.findAll();
-    }
-    async find(feeId) {
-        return this.feeService.findById(feeId);
+    async find() {
+        return this.feeService.find();
     }
     async create(body) {
-        return this.feeService.create(body);
+        return this.feeService.create(body.title, body.price);
     }
-    async remove(feeId) {
-        return this.feeService.remove(feeId);
+    async edit(id, body) {
+        return this.feeService.edit(id, body.price);
+    }
+    async delete(id) {
+        return this.feeService.delete(id);
     }
 };
 __decorate([
@@ -38,17 +37,8 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], FeeController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Get)('detail/:feeId'),
-    __param(0, (0, common_1.Param)('feeId')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
 ], FeeController.prototype, "find", null);
 __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -56,12 +46,20 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], FeeController.prototype, "create", null);
 __decorate([
-    (0, common_1.Post)('remove/:feeId'),
-    __param(0, (0, common_1.Param)('feeId')),
+    (0, common_1.Post)('edit/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
-], FeeController.prototype, "remove", null);
+], FeeController.prototype, "edit", null);
+__decorate([
+    (0, common_1.Delete)('delete/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], FeeController.prototype, "delete", null);
 FeeController = __decorate([
     (0, common_1.Controller)('fee'),
     __metadata("design:paramtypes", [fee_service_1.FeeService])

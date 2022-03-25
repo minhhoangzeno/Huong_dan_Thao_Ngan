@@ -1,4 +1,5 @@
 /// <reference types="multer" />
+/// <reference types="mongoose" />
 import { ProductDto } from './dto/product.dto';
 import { ProductService } from './product.service';
 export declare class ProductController {

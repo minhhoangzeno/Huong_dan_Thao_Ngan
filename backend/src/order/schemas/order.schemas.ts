@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
-import { OrderItem } from 'src/order-item/schemas/order-item.schemas';
+import * as mongoose from 'mongoose';
 import { User } from 'src/user/schemas/user.schemas';
 
 export type OrderDocument = Order & Document;
@@ -11,36 +10,84 @@ export class Order {
     @Prop()
     id: mongoose.Schema.Types.ObjectId;
 
-    @Prop({ required: true })
-    fullName: string;
+    @Prop({
+        type: {
+            fullName: { type: String }, phoneNumber: { type: String },
+            city: { type: String },
+            district: { type: String },
+            address: { type: String },
+        }
+    })
+    peopleSend: {
+        fullName: String,
+        phoneNumber: String,
+        city: String,
+        district: String,
+        address: String
+    }
 
-    @Prop({ required: true })
-    phoneNumber: string;
+    @Prop({
+        type: {
+            fullName: { type: String }, phoneNumber: { type: String },
+            city: { type: String },
+            district: { type: String },
+            address: { type: String },
+        }
+    })
+    peopleRecieve: {
+        fullName: String,
+        phoneNumber: String,
+        city: String,
+        district: String,
+        address: String
+    }
 
-    @Prop({ required: true })
-    email: string;
-
-    @Prop({ required: true })
-    address: string;
-
-    @Prop({ required: true })
-    price: Number;
+    @Prop({ type: mongoose.Schema.Types.ObjectId })
+    createdBy: User
 
     @Prop()
-    note: string;
+    code: String
 
-    @Prop({ default: 'Pending' })
-    status: string;
+    @Prop()
+    feedback: String
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
-    user: User;
+    @Prop()
+    title: String
 
-    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'OrderItem' }] })
-    orders: OrderItem[];
+    @Prop()
+    weight: String
+
+    @Prop()
+    note: String
+
+    @Prop()
+    priceNotIncludeService: Number
+
+    @Prop({
+        type: {
+            priceService: { type: Number }, serviceName: { type: String }
+        }
+    })
+    service: {
+        priceService: Number,
+        serviceName: String
+    }
+
+    @Prop()
+    ecommerce: Number
+
+    @Prop()
+    amount: Number
+
+    @Prop()
+    totalPrice: Number
+
+    @Prop({ default: "Pending" })
+    status: String
 
     @Prop({ default: new Date() })
     createdAt: Date;
-
 }
+
 
 export const OrderSchema = SchemaFactory.createForClass(Order);

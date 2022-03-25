@@ -38,11 +38,11 @@ export default () => {
               <Col xs={12} className="d-flex align-items-center justify-content-center">
                 <div className="bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                   <div className="text-center text-md-center mb-4 mt-md-0">
-                    <h3 className="mb-0">Sign in</h3>
+                    <h3 className="mb-0">Đăng nhập</h3>
                   </div>
                   <Form className="mt-4">
                     <Form.Group id="email" className="mb-4">
-                      <Form.Label>Your Email</Form.Label>
+                      <Form.Label>Tài khoản</Form.Label>
                       <Controller
                         control={control}
                         name="username"
@@ -65,7 +65,7 @@ export default () => {
                     </Form.Group>
                     <Form.Group>
                       <Form.Group id="password" className="mb-4">
-                        <Form.Label>Your Password</Form.Label>
+                        <Form.Label>Mật khẩu</Form.Label>
                         <Controller
                           control={control}
                           name="password"
@@ -89,19 +89,19 @@ export default () => {
                     <div className="d-flex align-items-center mt-2 mb-4" style={{ justifyContent: 'flex-end' }} >
                       <span className="fw-normal">
                         <Card.Link as={Link} to={Routes.ForgotPassword.path} className="fw-bold text-blue">
-                          {` Forgot Password `}
+                          {` Quên mật khẩu `}
                         </Card.Link>
                       </span>
                     </div>
                     <Button variant="primary" type="submit" className="w-100" onClick={handleSubmit(signin)} >
-                      Sign in
+                      Đăng nhập
                     </Button>
                   </Form>
                   <div className="d-flex justify-content-center align-items-center mt-4">
                     <span className="fw-normal">
-                      Not registered?
+                      Chưa có tài khoản?
                       <Card.Link as={Link} to={Routes.Signup.path} className="fw-bold">
-                        {` Create account `}
+                        {` Tạo tài khoản`}
                       </Card.Link>
                     </span>
                   </div>

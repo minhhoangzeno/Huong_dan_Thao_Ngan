@@ -41,6 +41,7 @@ export const Routes = {
     // page - provide
 
     Blog: { path: "/blog" },
+    BlogUser: { path: "/tin-tuc" },
     BlogAdd: { path: "/blog/add" },
     BlogDetail: { path: "/blog/detail" },
     BlogEdit: { path: "/blog/edit" },
@@ -50,17 +51,14 @@ export const Routes = {
     VideoDetail: { path: "/video/detail" },
     VideoEdit: { path: "/video/edit" },
 
-    Product: { path: "/product" },
-    ProductAdd: { path: "/product/add" },
-    ProductEdit: { path: "/product/edit" },
-    ProductDetail: { path: "/product/detail" },
-
-    Category: { path: "/category" },
-    CategoryAdd: { path: "/category/add" },
-    CategoryDetail: { path: "/category/detail" },
-    CategoryEdit: { path: "/category/edit" },
-
     Order: { path: "/order" },
     OrderDetail: { path: "/order/detail" },
-    OrderEdit: { path: "/order/edit" },
+    OrderAdd: { path: "/order/add" },
+    OrderUser: { path: "/order-user" },
+
+    User: { path: "/user" },
+    Feedback: { path: "/feedback" },
+    FeedbackUser: { path: "/feedback-user" },
+
+    Fee: { path: "/fee" },
 };

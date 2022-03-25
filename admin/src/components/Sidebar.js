@@ -1,5 +1,5 @@
 
-import { faChartPie, faHandHoldingUsd, faSignOutAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faChartPie, faHandHoldingUsd, faSignOutAlt, faSimCard, faTimes, faUserAstronaut } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Badge, Button, Dropdown, Image, Nav, Navbar } from '@themesberg/react-bootstrap';
 import React, { useState } from "react";
@@ -16,31 +16,9 @@ export default (props = {}) => {
   const { pathname } = location;
   const [show, setShow] = useState(false);
   const showClass = show ? "show" : "";
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const onCollapse = () => setShow(!show);
-
-  // const CollapsableNavItem = (props) => {
-  //   const { eventKey, title, icon, children = null } = props;
-  //   const defaultKey = pathname.indexOf(eventKey) !== -1 ? eventKey : "";
-
-  //   return (
-  //     <Accordion as={Nav.Item} defaultActiveKey={defaultKey}>
-  //       <Accordion.Item eventKey={eventKey}>
-  //         <Accordion.Button as={Nav.Link} className="d-flex justify-content-between align-items-center">
-  //           <span>
-  //             <span className="sidebar-icon"><FontAwesomeIcon icon={icon} /> </span>
-  //             <span className="sidebar-text">{title}</span>
-  //           </span>
-  //         </Accordion.Button>
-  //         <Accordion.Body className="multi-level">
-  //           <Nav className="flex-column">
-  //             {children}
-  //           </Nav>
-  //         </Accordion.Body>
-  //       </Accordion.Item>
-  //     </Accordion>
-  //   );
-  // };
 
   const NavItem = (props) => {
     const { title, link, external, target, icon, image, badgeText, badgeBg = "secondary", badgeColor = "primary" } = props;
@@ -97,29 +75,22 @@ export default (props = {}) => {
             <Nav className="flex-column pt-3 pt-md-0">
               {/* <NavItem title="Taekwondo" link={Routes} image={ReactHero} /> */}
 
-              <NavItem title="Overview" link={Routes.DashboardOverview.path} icon={faChartPie} />
-              {/* <NavItem title="Transactions" icon={faHandHoldingUsd} link={Routes.Transactions.path} />
+              <NavItem title="Tổng quan" link={Routes.DashboardOverview.path} icon={faChartPie} />
+              {(user.roles === "superadmin") && <NavItem title="Cấp quyền người dùng" icon={faUserAstronaut} link={Routes.User.path} />}
+              {(user.roles === "superadmin") && <NavItem title="Thay đổi cước phí" icon={faUserAstronaut} link={Routes.Fee.path} />}
 
-              <CollapsableNavItem eventKey="tables/" title="Tables" icon={faTable}>
-                <NavItem title="Bootstrap Table" link={Routes.BootstrapTables.path} />
-              </CollapsableNavItem> */}
-
-              {/* <NavItem title="Blog" icon={faHandHoldingUsd} link={Routes.Blog.path} />
-
-              <NavItem title="Video" icon={faHandHoldingUsd} link={Routes.Video.path} /> */}
-
-              <NavItem title="Product" icon={faHandHoldingUsd} link={Routes.Product.path} />
-
-              <NavItem title="Category" icon={faHandHoldingUsd} link={Routes.Category.path} />
+              {(user.roles === "admin" || user.roles === "superadmin") && <NavItem title="Bài viết" link={Routes.Blog.path} icon={faChartPie} />}
+              <NavItem title="Tin tức" icon={faHandHoldingUsd} link={Routes.BlogUser.path} />
 
               <Dropdown.Divider className="my-3 border-indigo" />
 
-              <NavItem title="Order" icon={faHandHoldingUsd} link={Routes.Order.path} />
+              {(user.roles === "admin" || user.roles === "superadmin") && <NavItem title="Đơn hàng" icon={faHandHoldingUsd} link={Routes.Order.path} />}
 
-              {/* <CollapsableNavItem eventKey="components/" title="Components" icon={faBoxOpen}>
-                <NavItem title="Blog" link={Routes.Blog.path} />
-                <NavItem title="BlogAdd" link={Routes.BlogAdd.path} />
-              </CollapsableNavItem> */}
+              {(user.roles === "admin" || user.roles === "superadmin") && <NavItem title="Phản hồi người dùng" icon={faHandHoldingUsd} link={Routes.FeedbackUser.path} />}
+
+              <NavItem title="Đơn hàng của tôi" icon={faHandHoldingUsd} link={Routes.OrderUser.path} />
+              <NavItem title="Phản hồi" icon={faSimCard} link={Routes.Feedback.path} />
+
             </Nav>
           </div>
         </SimpleBar>

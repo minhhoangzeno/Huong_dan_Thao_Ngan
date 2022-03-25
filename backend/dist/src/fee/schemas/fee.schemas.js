@@ -24,12 +24,12 @@ __decorate([
 ], Fee.prototype, "title", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", Date)
-], Fee.prototype, "time", void 0);
+    __metadata("design:type", Number)
+], Fee.prototype, "price", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'FeeUser' }] }),
-    __metadata("design:type", Array)
-], Fee.prototype, "feeUsers", void 0);
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Date)
+], Fee.prototype, "createdAt", void 0);
 Fee = __decorate([
     (0, mongoose_1.Schema)()
 ], Fee);

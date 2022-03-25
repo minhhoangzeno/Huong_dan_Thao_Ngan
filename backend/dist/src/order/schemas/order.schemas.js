@@ -20,41 +20,79 @@ __decorate([
     __metadata("design:type", mongoose.Schema.Types.ObjectId)
 ], Order.prototype, "id", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", String)
-], Order.prototype, "fullName", void 0);
+    (0, mongoose_1.Prop)({
+        type: {
+            fullName: { type: String }, phoneNumber: { type: String },
+            city: { type: String },
+            district: { type: String },
+            address: { type: String },
+        }
+    }),
+    __metadata("design:type", Object)
+], Order.prototype, "peopleSend", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", String)
-], Order.prototype, "phoneNumber", void 0);
+    (0, mongoose_1.Prop)({
+        type: {
+            fullName: { type: String }, phoneNumber: { type: String },
+            city: { type: String },
+            district: { type: String },
+            address: { type: String },
+        }
+    }),
+    __metadata("design:type", Object)
+], Order.prototype, "peopleRecieve", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", String)
-], Order.prototype, "email", void 0);
+    (0, mongoose_1.Prop)({ type: mongoose.Schema.Types.ObjectId }),
+    __metadata("design:type", user_schemas_1.User)
+], Order.prototype, "createdBy", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ required: true }),
+    (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], Order.prototype, "address", void 0);
+], Order.prototype, "code", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", Number)
-], Order.prototype, "price", void 0);
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Order.prototype, "feedback", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Order.prototype, "title", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Order.prototype, "weight", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Order.prototype, "note", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ default: 'Pending' }),
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Order.prototype, "priceNotIncludeService", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: {
+            priceService: { type: Number }, serviceName: { type: String }
+        }
+    }),
+    __metadata("design:type", Object)
+], Order.prototype, "service", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Order.prototype, "ecommerce", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Order.prototype, "amount", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Order.prototype, "totalPrice", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: "Pending" }),
     __metadata("design:type", String)
 ], Order.prototype, "status", void 0);
-__decorate([
-    (0, mongoose_1.Prop)({ type: mongoose.Schema.Types.ObjectId, ref: 'User' }),
-    __metadata("design:type", user_schemas_1.User)
-], Order.prototype, "user", void 0);
-__decorate([
-    (0, mongoose_1.Prop)({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'OrderItem' }] }),
-    __metadata("design:type", Array)
-], Order.prototype, "orders", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ default: new Date() }),
     __metadata("design:type", Date)

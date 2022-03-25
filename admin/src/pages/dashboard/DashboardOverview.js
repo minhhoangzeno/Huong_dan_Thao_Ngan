@@ -1,13 +1,12 @@
 import { Col, Row } from '@themesberg/react-bootstrap';
 import React from "react";
 import OrderOverview from './OrderOverview';
-// import CountdownOverview from './CountdownOverview';
-// import DetailCountdownOverview from './DetailCountdownOverview';
-import ProductOverview from './ProductOverview';
+import OrderUserOverview from './OrderUserOverview';
 import UserOverview from './UserOverview';
 
 
 export default () => {
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <>
       <Row className="justify-content-md-center">
@@ -18,9 +17,10 @@ export default () => {
             percentage={10.57}
           />
         </Col> */}
-        <UserOverview />
-        <ProductOverview />
-        <OrderOverview />
+        {(user.roles === "superadmin" || user.roles === "admin") && <UserOverview />}
+        {(user.roles === "superadmin" || user.roles === "admin") ?  <OrderOverview /> : <OrderUserOverview /> }
+
+       
       </Row>
 
       <Row>

@@ -1,25 +1,31 @@
+/// <reference types="mongoose" />
+import { OrderDto } from './dto/order.dto';
 import { OrderService } from './order.service';
 export declare class OrderController {
     private orderService;
     constructor(orderService: OrderService);
-    findAll(): Promise<(import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
+    getOrder(): Promise<(import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
         _id: any;
     })[]>;
-    findById(id: any): Promise<{
-        order: import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
-            _id: any;
-        };
-        orders: (import("../order-item/schemas/order-item.schemas").OrderItem & import("mongoose").Document<any, any, any> & {
-            _id: any;
-        })[];
-    }>;
-    create(body: any, req: any): Promise<import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
+    searchOrder(body: any): Promise<(import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
+        _id: any;
+    })[]>;
+    getOrderByUserId(userId: any): Promise<(import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
+        _id: any;
+    })[]>;
+    createOrder(body: OrderDto, req: any): Promise<import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;
-    update(id: any, body: any): Promise<import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
+    edit(body: OrderDto, id: any): Promise<import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;
-    delete(id: any): Promise<import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
+    changeStatus(body: any, id: any): Promise<import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
+        _id: any;
+    }>;
+    feedBack(body: any, id: any): Promise<import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
+        _id: any;
+    }>;
+    remove(id: any): Promise<import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;
 }

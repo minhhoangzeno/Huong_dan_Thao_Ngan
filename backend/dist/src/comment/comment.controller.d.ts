@@ -1,3 +1,4 @@
+/// <reference types="mongoose" />
 import { CommentService } from './comment.service';
 import { CommentDto } from './dto/comment.dto';
 export declare class CommentController {

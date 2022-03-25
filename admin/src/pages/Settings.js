@@ -43,11 +43,11 @@ export default () => {
         <Col xs={12} xl={8}>
           <Card border="light" className="bg-white shadow-sm mb-4">
             <Card.Body>
-              <h5 className="mb-4">General information</h5>
+              <h5 className="mb-4">Thông tin cá nhân</h5>
               <Row>
                 <Col md={6} className="mb-3">
                   <Form.Group id="firstName">
-                    <Form.Label>First Name</Form.Label>
+                    <Form.Label>Họ</Form.Label>
                     <Controller
                       control={control}
                       name="firstName"
@@ -70,7 +70,7 @@ export default () => {
                 </Col>
                 <Col md={6} className="mb-3">
                   <Form.Group id="firstName">
-                    <Form.Label>Last Name</Form.Label>
+                    <Form.Label>Tên</Form.Label>
                     <Controller
                       control={control}
                       name="lastName"
@@ -95,7 +95,7 @@ export default () => {
 
               </Row>
               <div className="mt-3">
-                <Button variant="primary" type="button" onClick={handleSubmit(updateProfile)} >Save All</Button>
+                <Button variant="primary" type="button" onClick={handleSubmit(updateProfile)} >Lưu</Button>
               </div>
             </Card.Body>
           </Card>
@@ -104,13 +104,10 @@ export default () => {
 
         <Col xs={12} xl={4}>
           <Row>
-            {/* <Col xs={12}>
-              <ProfileCardWidget />
-            </Col> */}
             <Col xs={12}>
               <Card border="light" className="bg-white shadow-sm mb-4">
                 <Card.Body>
-                  <h5 className="mb-4">Select profile photo</h5>
+                  <h5 className="mb-4">Chọn ảnh đại diện cá nhân</h5>
                   <div className="d-xl-flex align-items-center">
                     <div className="user-avatar xl-avatar">
 
@@ -129,8 +126,8 @@ export default () => {
                             onChange={e => setFile(e.target.files[0])}
                           />
                           <div className="d-md-block text-start">
-                            <div className="fw-normal text-dark mb-1">Choose Image</div>
-                            <div className="text-gray small">JPG, GIF or PNG. Max size of 800K</div>
+                            <div className="fw-normal text-dark mb-1">Chọn ảnh</div>
+                            <div className="text-gray small">JPG, GIF hoặc PNG.</div>
                           </div>
                         </div>
                       </div>

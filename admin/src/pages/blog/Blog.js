@@ -38,7 +38,7 @@ export default () => {
         <Container>
             <Row className="mb-4" >
                 <Col>
-                    <Button variant="warning" onClick={() => history.push(Routes.BlogAdd.path)} >Add</Button>
+                    <Button variant="warning" onClick={() => history.push(Routes.BlogAdd.path)} >Tạo</Button>
                 </Col>
             </Row>
             <Row>
@@ -64,9 +64,9 @@ function BlogItem({ blog, deleteBlog, routerDetailBlog,routerEditBlog }) {
                         {blog?.metaDescription}
                     </Card.Text>
                     <Card.Subtitle className="d-flex justify-content-between" >
-                        <Button variant="primary" onClick={() => routerDetailBlog(blog)} >Detail</Button>
-                        <Button variant="secondary" onClick={() => routerEditBlog(blog)} >Edit</Button>
-                        <Button variant="danger" onClick={() => deleteBlog(blog._id)} >Delete</Button>
+                        <Button variant="primary" onClick={() => routerDetailBlog(blog)} >Xem</Button>
+                        <Button variant="secondary" onClick={() => routerEditBlog(blog)} >Sửa</Button>
+                        <Button variant="danger" onClick={() => deleteBlog(blog._id)} >Xóa</Button>
                     </Card.Subtitle>
 
                 </Card.Body>

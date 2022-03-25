@@ -13,7 +13,6 @@ exports.UserSchema = exports.User = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose = require("mongoose");
 const user_status_enum_1 = require("../enum/user-status.enum");
-const role_enum_1 = require("../../role/role.enum");
 let User = class User {
 };
 __decorate([
@@ -46,18 +45,30 @@ __decorate([
 ], User.prototype, "firstName", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", Number)
+], User.prototype, "city", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], User.prototype, "phoneNumber", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", Number)
+], User.prototype, "district", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], User.prototype, "lastName", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ default: role_enum_1.Role.User }),
-    __metadata("design:type", Array)
+    (0, mongoose_1.Prop)({ default: "user" }),
+    __metadata("design:type", String)
 ], User.prototype, "roles", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], User.prototype, "fullName", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ default: null }),
     __metadata("design:type", String)
 ], User.prototype, "photoURL", void 0);
 User = __decorate([

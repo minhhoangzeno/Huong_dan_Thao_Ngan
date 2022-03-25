@@ -30,15 +30,24 @@ export class User {
     firstName: string;
 
     @Prop({ required: true })
+    city: number;
+
+    @Prop({ required: true })
+    phoneNumber: string;
+
+    @Prop({ required: true })
+    district: number;
+
+    @Prop({ required: true })
     lastName: string;
 
-    @Prop({default: Role.User })
-    roles: Role[]
+    @Prop({ default: "user" })
+    roles: string
 
     @Prop()
     fullName: string;
 
-    @Prop()
+    @Prop({ default: null })
     photoURL: string;
 
 }

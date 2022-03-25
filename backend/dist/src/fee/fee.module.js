@@ -9,8 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FeeModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const fee_user_schemas_1 = require("../fee-user/schemas/fee-user.schemas");
-const user_schemas_1 = require("../user/schemas/user.schemas");
 const fee_controller_1 = require("./fee.controller");
 const fee_service_1 = require("./fee.service");
 const fee_schemas_1 = require("./schemas/fee.schemas");
@@ -18,10 +16,7 @@ let FeeModule = class FeeModule {
 };
 FeeModule = __decorate([
     (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forFeature([{ name: fee_schemas_1.Fee.name, schema: fee_schemas_1.FeeSchema }]),
-            mongoose_1.MongooseModule.forFeature([{ name: fee_user_schemas_1.FeeUser.name, schema: fee_user_schemas_1.FeeUserSchema }]),
-            mongoose_1.MongooseModule.forFeature([{ name: user_schemas_1.User.name, schema: user_schemas_1.UserSchema }])
-        ],
+        imports: [mongoose_1.MongooseModule.forFeature([{ name: fee_schemas_1.Fee.name, schema: fee_schemas_1.FeeSchema }])],
         controllers: [fee_controller_1.FeeController],
         providers: [fee_service_1.FeeService]
     })

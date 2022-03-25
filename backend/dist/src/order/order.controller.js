@@ -15,24 +15,34 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderController = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_auth_guard_1 = require("../auth/guard/jwt-auth.guard");
+const order_dto_1 = require("./dto/order.dto");
 const order_service_1 = require("./order.service");
 let OrderController = class OrderController {
     constructor(orderService) {
         this.orderService = orderService;
     }
-    async findAll() {
+    async getOrder() {
         return this.orderService.findAll();
     }
-    async findById(id) {
-        return this.orderService.findById(id);
+    async searchOrder(body) {
+        return this.orderService.search(body.textSearch);
     }
-    async create(body, req) {
-        return this.orderService.create(body.order, body.orders, req.user._doc._id);
+    async getOrderByUserId(userId) {
+        return this.orderService.findByUser(userId);
     }
-    async update(id, body) {
-        return this.orderService.update(id, body);
+    async createOrder(body, req) {
+        return this.orderService.createOrder(body, req.user._doc._id);
     }
-    async delete(id) {
+    async edit(body, id) {
+        return this.orderService.updateOrder(body, id);
+    }
+    async changeStatus(body, id) {
+        return this.orderService.changeStatus(id, body.status);
+    }
+    async feedBack(body, id) {
+        return this.orderService.feedback(id, body.feedback);
+    }
+    async remove(id) {
         return this.orderService.delete(id);
     }
 };
@@ -41,40 +51,65 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], OrderController.prototype, "findAll", null);
+], OrderController.prototype, "getOrder", null);
 __decorate([
-    (0, common_1.Get)('detail/:id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('search'),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], OrderController.prototype, "findById", null);
+], OrderController.prototype, "searchOrder", null);
+__decorate([
+    (0, common_1.Get)('user/:userId'),
+    __param(0, (0, common_1.Param)('userId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "getOrderByUserId", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [order_dto_1.OrderDto, Object]),
     __metadata("design:returntype", Promise)
-], OrderController.prototype, "create", null);
+], OrderController.prototype, "createOrder", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('edit/:id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [order_dto_1.OrderDto, Object]),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "edit", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('status/:id'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
-], OrderController.prototype, "update", null);
+], OrderController.prototype, "changeStatus", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('feedback/:id'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "feedBack", null);
+__decorate([
     (0, common_1.Delete)('delete/:id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], OrderController.prototype, "delete", null);
+], OrderController.prototype, "remove", null);
 OrderController = __decorate([
     (0, common_1.Controller)('order'),
     __metadata("design:paramtypes", [order_service_1.OrderService])

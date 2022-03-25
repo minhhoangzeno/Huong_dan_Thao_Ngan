@@ -12,10 +12,7 @@ import Blog from "./blog/Blog";
 import BlogAdd from './blog/BlogAdd';
 import BlogDetail from "./blog/BlogDetail";
 import BlogEdit from "./blog/BlogEdit";
-import Category from "./category/Category";
-import CategoryAdd from "./category/CategoryAdd";
-import CategoryDetail from "./category/CategoryDetail";
-import CategoryEdit from "./category/CategoryEdit";
+import BlogUser from "./blog/BlogUser";
 import Accordion from "./components/Accordion";
 import Alerts from "./components/Alerts";
 import Badges from "./components/Badges";
@@ -34,21 +31,21 @@ import Toasts from "./components/Toasts";
 import Tooltips from "./components/Tooltips";
 import DashboardOverview from "./dashboard/DashboardOverview";
 import ChangePassword from "./examples/ChangePassword";
+import Fee from "./fee/Fee";
+import Feedback from './feedback/Feedback';
+import FeedbackOrder from "./feedback/FeedbackOrder";
 import Order from "./order/Order";
+import OrderAdd from "./order/OrderAdd";
 import OrderDetail from "./order/OrderDetail";
-import OrderEdit from "./order/OrderEdit";
-import Product from "./product/Product";
-import ProductAdd from "./product/ProductAdd";
-import ProductDetail from "./product/ProductDetail";
-import ProductEdit from "./product/ProductEdit";
+import OrderUser from "./order/OrderUser";
 import Settings from './Settings';
 import BootstrapTables from "./tables/BootstrapTables";
 import Transactions from "./Transactions";
+import User from "./user/User";
 import Video from "./video/Video";
 import VideoAdd from "./video/VideoAdd";
 import VideoDetail from "./video/VideoDetail";
 import VideoEdit from "./video/VideoEdit";
-
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
     const [loaded, setLoaded] = useState(false);
 
@@ -86,10 +83,27 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
 
 
 export default function ProvideAuth() {
+    // let dispatch = useDispatch();
+    // let search = async () => {
+    //     let data = await dispatch(getFeeThunk());
+    //     if (data) {
+    //         let arrayBT = data.filter(item => item.title === "Bắc - Trung")[0];
+    //         let arrayBN = data.filter(item => item.title === "Bắc - Nam")[0];
+    //         let arrayNT = data.filter(item => item.title === "Trung - Nam")[0];
+    //         let arrayNM = data.filter(item => item.title === "Nội miền")[0];
+    //         localStorage.setItem("priceBT", arrayBT?.price);
+    //         localStorage.setItem("priceBN", arrayBN?.price);
+    //         localStorage.setItem("priceNT", arrayNT?.price);
+    //         localStorage.setItem("priceNM", arrayNM?.price);
+    //     }
+    // }
+    // useEffect(() => {
+    //     search() // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
     return (
         <Switch>
 
-           
+
 
             {/* pages */}
             <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
@@ -118,29 +132,29 @@ export default function ProvideAuth() {
             {/* components */}
 
             <RouteWithSidebar exact path={Routes.Blog.path} component={Blog} />
+            <RouteWithSidebar exact path={Routes.BlogUser.path} component={BlogUser} />
             <RouteWithSidebar exact path={Routes.BlogAdd.path} component={BlogAdd} />
             <RouteWithSidebar exact path={Routes.BlogDetail.path} component={BlogDetail} />
             <RouteWithSidebar exact path={Routes.BlogEdit.path} component={BlogEdit} />
-          
+
 
             <RouteWithSidebar exact path={Routes.Video.path} component={Video} />
             <RouteWithSidebar exact path={Routes.VideoAdd.path} component={VideoAdd} />
             <RouteWithSidebar exact path={Routes.VideoDetail.path} component={VideoDetail} />
             <RouteWithSidebar exact path={Routes.VideoEdit.path} component={VideoEdit} />
 
-            <RouteWithSidebar exact path={Routes.Product.path} component={Product} />
-            <RouteWithSidebar exact path={Routes.ProductAdd.path} component={ProductAdd} />
-            <RouteWithSidebar exact path={Routes.ProductEdit.path} component={ProductEdit} />
-            <RouteWithSidebar exact path={Routes.ProductDetail.path} component={ProductDetail} />
-
-            <RouteWithSidebar exact path={Routes.Category.path} component={Category} />
-            <RouteWithSidebar exact path={Routes.CategoryAdd.path} component={CategoryAdd} />
-            <RouteWithSidebar exact path={Routes.CategoryDetail.path} component={CategoryDetail} />
-            <RouteWithSidebar exact path={Routes.CategoryEdit.path} component={CategoryEdit} />
-
             <RouteWithSidebar exact path={Routes.Order.path} component={Order} />
             <RouteWithSidebar exact path={Routes.OrderDetail.path} component={OrderDetail} />
-            <RouteWithSidebar exact path={Routes.OrderEdit.path} component={OrderEdit} />
+            <RouteWithSidebar exact path={Routes.OrderAdd.path} component={OrderAdd} />
+            <RouteWithSidebar exact path={Routes.OrderUser.path} component={OrderUser} />
+
+            <RouteWithSidebar exact path={Routes.User.path} component={User} />
+
+            <RouteWithSidebar exact path={Routes.Feedback.path} component={FeedbackOrder} />
+            <RouteWithSidebar exact path={Routes.FeedbackUser.path} component={Feedback} />
+
+            <RouteWithSidebar exact path={Routes.Fee.path} component={Fee} />
+
 
             <Redirect from="/" to="/" />
         </Switch>

@@ -46,10 +46,10 @@ export default () => {
                     <Row className="justify-content-center">
                         <Col xs={12} className="d-flex align-items-center justify-content-center">
                             <div className="bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-                                <h3 className="mb-4">Change password</h3>
+                                <h3 className="mb-4">Thay đổi mật khẩu</h3>
                                 <Form>
                                     <Form.Group id="newPassword" className="mb-4">
-                                        <Form.Label>Your Old Password</Form.Label>
+                                        <Form.Label>Mật khẩu cũ</Form.Label>
                                         <Controller
                                             control={control}
                                             name="oldPassword"
@@ -71,7 +71,7 @@ export default () => {
                                         <span style={{ color: 'red', fontSize: 12 }} >{errors.oldPassword?.type === 'minLength' && "* Mật khẩu cần ít nhất là 8 ký tự"}</span>
                                     </Form.Group>
                                     <Form.Group id="newPassword" className="mb-4">
-                                        <Form.Label>Your New Password</Form.Label>
+                                        <Form.Label>Mật khẩu mới</Form.Label>
                                         <Controller
                                             control={control}
                                             name="newPassword"
@@ -93,7 +93,7 @@ export default () => {
                                         <span style={{ color: 'red', fontSize: 12 }} >{errors.newPassword?.type === 'minLength' && "* Mật khẩu cần ít nhất là 8 ký tự"}</span>
                                     </Form.Group>
                                     <Form.Group id="confirmPassword" className="mb-4">
-                                        <Form.Label>Confirm Password</Form.Label>
+                                        <Form.Label>Xác nhận mật khẩu mới</Form.Label>
                                         <Controller
                                             control={control}
                                             name="confirmPassword"
@@ -116,7 +116,7 @@ export default () => {
                                         <span style={{ color: 'red', fontSize: 12 }} >{errors.confirmPassword?.type === 'minLength' && "* Mật khẩu cần ít nhất là 8 ký tự"}</span>
                                     </Form.Group>
                                     <Button variant="primary" type="button" className="w-100" onClick={handleSubmit(changePassord)} >
-                                        Reset password
+                                        Xác nhận
                                     </Button>
                                 </Form>
                             </div>

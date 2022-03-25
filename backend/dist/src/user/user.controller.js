@@ -52,6 +52,9 @@ let UserController = class UserController {
             return this.userService.updateById(req.user._doc, body);
         }
     }
+    async roleUser(body) {
+        return this.userService.roleUser(body.id, body.role);
+    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -122,6 +125,14 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updateUser", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('role'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "roleUser", null);
 UserController = __decorate([
     (0, common_1.Controller)('user'),
     __metadata("design:paramtypes", [user_service_1.UserService])

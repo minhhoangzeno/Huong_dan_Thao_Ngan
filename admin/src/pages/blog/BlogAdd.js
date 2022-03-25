@@ -30,10 +30,10 @@ export default () => {
     return (
         <Container>
             <Row>
-            <h3 className="mb-3">Add Blog</h3>
+            <h3 className="mb-3">Tạo bài viết</h3>
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Title</Form.Label>
+                        <Form.Label>Tiêu đề</Form.Label>
                         <Controller
                             control={control}
                             name="title"
@@ -52,7 +52,7 @@ export default () => {
                         />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>Meta description</Form.Label>
+                        <Form.Label>Mô tả ngắn gọn</Form.Label>
                         <Controller
                             control={control}
                             name="metaDescription"
@@ -72,7 +72,7 @@ export default () => {
                     </Form.Group>
 
                     <Form.Group>
-                        <Form.Label>Content</Form.Label>
+                        <Form.Label>Nội dung</Form.Label>
                         <Controller
                             control={control}
                             name="content"
@@ -92,7 +92,7 @@ export default () => {
                     </Form.Group>
 
                     <Form.Group className="mt-4" >
-                        <Form.Label>Image</Form.Label>
+                        <Form.Label>Ảnh</Form.Label>
                         <div className="d-xl-flex align-items-center">
                             <div className="user-avatar xl-avatar">
                                 {file && <img id="target" src={URL.createObjectURL(file)} alt="" />}
@@ -107,8 +107,8 @@ export default () => {
                                             onChange={e => setFile(e.target.files[0])}
                                         />
                                         <div className="d-md-block text-start">
-                                            <div className="fw-normal text-dark mb-1">Choose Image</div>
-                                            <div className="text-gray small">JPG, GIF or PNG. Max size of 800K</div>
+                                            <div className="fw-normal text-dark mb-1">Chọn ảnh</div>
+                                            <div className="text-gray small">JPG, GIF hoặc PNG.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -117,12 +117,12 @@ export default () => {
                     </Form.Group>
 
                     <Button variant="primary" type="button" onClick={handleSubmit(addData)} >
-                        Submit
+                        Xác nhận
                     </Button>
                     <Button variant="secondary" type="button" className="m-3" 
                     onClick={() => history.push(Routes.Blog.path)}
                     >
-                        Cancel
+                        Quay lại
                     </Button>
                 </Form>
             </Row>

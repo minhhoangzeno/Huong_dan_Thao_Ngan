@@ -11,11 +11,12 @@ import { ReplyModule } from './reply/reply.module';
 import { UserModule } from './user/user.module';
 import { VideoModule } from './video/video.module';
 import { OrderModule } from './order/order.module';
-import { OrderItemModule } from './order-item/order-item.module';
+import { FeedbackModule } from './feedback/feedback.module';
+import { FeeModule } from './fee/fee.module';
 
 @Module({
   imports: [UserModule,
-    MongooseModule.forRoot('mongodb://localhost/tuyet'),
+    MongooseModule.forRoot('mongodb://localhost/thaongan'),
     AuthModule,
     BlogModule,
     VideoModule,
@@ -24,7 +25,8 @@ import { OrderItemModule } from './order-item/order-item.module';
     CommentModule,
     ReplyModule,
     OrderModule,
-    OrderItemModule
+    FeedbackModule,
+    FeeModule
   ],
   controllers: [AppController],
   providers: [AppService],

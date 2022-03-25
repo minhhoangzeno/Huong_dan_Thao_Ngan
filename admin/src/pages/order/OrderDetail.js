@@ -1,11 +1,8 @@
 import { Button, Container, Form, InputGroup, Row } from '@themesberg/react-bootstrap';
 import React from 'react';
-import { Controller, useForm } from "react-hook-form";
 import { useHistory, useLocation } from 'react-router-dom';
-import { Routes } from '../../routes';
 
 export default () => {
-    const { control, formState: { errors } } = useForm();
     let location = useLocation();
     let order = location.state;
 
@@ -14,167 +11,70 @@ export default () => {
     return (
         <Container>
             <Row>
-                <h3 className="mb-3">Edit Order</h3>
+                <h3 className="mb-3">Chi tiết đơn hàng</h3>
                 <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Full Name</Form.Label>
-                        <Controller
-                            control={control}
-                            name="fullName"
-                            render={({
-                                field: { onChange, onBlur, value }
-                            }) => (
-                                <InputGroup style={{ border: errors.title?.type === "required" && '1px solid red' }}>
-                                    <Form.Control autoFocus required type="text" onChange={e => onChange(e.target.value)}
-                                        onBlur={onBlur}
-                                        value={value}
-                                        disabled
-                                    />
-                                </InputGroup>
-                            )}
-                            rules={{
-                                required: true
-                            }}
-                            defaultValue={order?.fullName}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Controller
-                            control={control}
-                            name="email"
-                            render={({
-                                field: { onChange, onBlur, value }
-                            }) => (
-                                <InputGroup style={{ border: errors.title?.type === "required" && '1px solid red' }}>
-                                    <Form.Control autoFocus required type="text" onChange={e => onChange(e.target.value)}
-                                        onBlur={onBlur}
-                                        value={value}
-                                        disabled
-                                    />
-                                </InputGroup>
-                            )}
-                            rules={{
-                                required: true
-                            }}
-                            defaultValue={order?.email}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Phone Number</Form.Label>
-                        <Controller
-                            control={control}
-                            name="phoneNumber"
-                            render={({
-                                field: { onChange, onBlur, value }
-                            }) => (
-                                <InputGroup style={{ border: errors.title?.type === "required" && '1px solid red' }}>
-                                    <Form.Control autoFocus required type="text" onChange={e => onChange(e.target.value)}
-                                        onBlur={onBlur}
-                                        value={value}
-                                        disabled
-                                    />
-                                </InputGroup>
-                            )}
-                            rules={{
-                                required: true
-                            }}
-                            defaultValue={order?.phoneNumber}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Address</Form.Label>
-                        <Controller
-                            control={control}
-                            name="address"
-                            render={({
-                                field: { onChange, onBlur, value }
-                            }) => (
-                                <InputGroup style={{ border: errors.title?.type === "required" && '1px solid red' }}>
-                                    <Form.Control autoFocus required type="text" onChange={e => onChange(e.target.value)}
-                                        onBlur={onBlur}
-                                        value={value}
-                                        disabled
-                                    />
-                                </InputGroup>
-                            )}
-                            rules={{
-                                required: true
-                            }}
-                            defaultValue={order?.address}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Price</Form.Label>
-                        <Controller
-                            control={control}
-                            name="price"
-                            render={({
-                                field: { onChange, onBlur, value }
-                            }) => (
-                                <InputGroup style={{ border: errors.title?.type === "required" && '1px solid red' }}>
-                                    <Form.Control autoFocus required type="text" onChange={e => onChange(e.target.value)}
-                                        onBlur={onBlur}
-                                        value={value}
-                                        disabled
-                                    />
-                                </InputGroup>
-                            )}
-                            rules={{
-                                required: true
-                            }}
-                            defaultValue={order?.price}
-                        />
-                    </Form.Group>
+                    <div className='order__detail' >
+                        <label>Thông tin người nhận - người gửi</label>
+                        <table>
+                            <thead>
+                                <th>Người gửi</th>
+                                <th>Nơi gửi</th>
+                                <th>Địa chỉ gửi</th>
+                                <th>Người nhận</th>
+                                <th>Nơi nhận</th>
+                                <th>Địa chỉ nhận</th>
+                            </thead>
+                            <tbody>
+                                <td>{order?.peopleSend.fullName}</td>
+                                <td>{order?.peopleSend.district} - {order?.peopleSend.city}</td>
+                                <td>{order?.peopleSend.address}</td>
+                                <td>{order?.peopleRecieve.fullName}</td>
+                                <td>{order?.peopleRecieve.district} - {order?.peopleRecieve.city}</td>
+                                <td>{order?.peopleRecieve.address}</td>
+                            </tbody>
+                        </table>
+                        <div style={{ height: 50 }} ></div>
+                        <label>Thông tin hàng gửi</label>
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Note</Form.Label>
-                        <Controller
-                            control={control}
-                            name="note"
-                            render={({
-                                field: { onChange, onBlur, value }
-                            }) => (
-                                <InputGroup style={{ border: errors.title?.type === "required" && '1px solid red' }}>
-                                    <Form.Control autoFocus required type="text" onChange={e => onChange(e.target.value)}
-                                        onBlur={onBlur}
-                                        value={value}
-                                        disabled
-                                    />
-                                </InputGroup>
-                            )}
-                            rules={{
-                                required: true
-                            }}
-                            defaultValue={order?.note}
+                        <table>
+                            <thead>
+                                <th>Tên hàng</th>
+                                <th>Số lượng</th>
+                                <th>Trọng lượng (kg)</th>
+                                <th>Cước phí</th>
+                                <th>Thu hộ</th>
+                            </thead>
+                            <tbody>
+                                <td>{order?.title}</td>
+                                <td>{order?.amount}</td>
+                                <td>{order?.weight}</td>
+                                <td>{order?.service.serviceName} : {order?.service.priceService}</td>
+                                <td>{order?.ecommerce}</td>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style={{ height: 50 }} ></div>
+                    <label>Trạng thái</label>
+                    <InputGroup >
+                        <Form.Control autoFocus required type="text"
+                           
+                            value={order?.status}
+                            disabled
                         />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Status</Form.Label>
-                        <Controller
-                            control={control}
-                            name="status"
-                            render={({
-                                field: { onChange, onBlur, value }
-                            }) => (
-                                <InputGroup style={{ border: errors.title?.type === "required" && '1px solid red' }}>
-                                    <Form.Control autoFocus required type="text" onChange={e => onChange(e.target.value)}
-                                        onBlur={onBlur}
-                                        value={value}
-                                        disabled
-                                    />
-                                </InputGroup>
-                            )}
-                            rules={{
-                                required: true
-                            }}
-                            defaultValue={order?.status}
+                    </InputGroup>
+                    <div style={{ height: 50 }} ></div>
+                    <label>Ghi chú</label>
+                    <InputGroup >
+                        <Form.Control autoFocus required type="text"
+                           
+                            value={order?.note}
+                            disabled
                         />
-                    </Form.Group>
+                    </InputGroup>
 
                     <Button variant="secondary" type="button" className="m-3"
-                        onClick={() => history.push(Routes.Order.path)}>
-                        Cancel
+                        onClick={() => history.goBack()}>
+                        Quay lại
                     </Button>
                 </Form>
             </Row>

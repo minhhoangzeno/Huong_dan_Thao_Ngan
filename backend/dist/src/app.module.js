@@ -20,13 +20,14 @@ const reply_module_1 = require("./reply/reply.module");
 const user_module_1 = require("./user/user.module");
 const video_module_1 = require("./video/video.module");
 const order_module_1 = require("./order/order.module");
-const order_item_module_1 = require("./order-item/order-item.module");
+const feedback_module_1 = require("./feedback/feedback.module");
+const fee_module_1 = require("./fee/fee.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [user_module_1.UserModule,
-            mongoose_1.MongooseModule.forRoot('mongodb://localhost/tuyet'),
+            mongoose_1.MongooseModule.forRoot('mongodb://localhost/thaongan'),
             auth_module_1.AuthModule,
             blog_module_1.BlogModule,
             video_module_1.VideoModule,
@@ -35,7 +36,8 @@ AppModule = __decorate([
             comment_module_1.CommentModule,
             reply_module_1.ReplyModule,
             order_module_1.OrderModule,
-            order_item_module_1.OrderItemModule
+            feedback_module_1.FeedbackModule,
+            fee_module_1.FeeModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

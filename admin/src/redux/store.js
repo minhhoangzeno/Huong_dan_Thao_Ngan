@@ -5,8 +5,10 @@ import authReducer from './authSlice';
 import videoReducer from './videoSlice';
 import productReducer from './productSlice';
 import dashboardReducer from './dashboardSlice';
-import categoryReducer from './categorySlice';
 import orderReducer from './orderSlice';
+import userReducer from './userSlice';
+import feedbackReducer from './feedbackSlice';
+import feeReducer from './feeSlice';
 //USE TOOLKIT
 const rootReducer = {
     reducer: {
@@ -16,9 +18,10 @@ const rootReducer = {
         video: videoReducer,
         product: productReducer,
         dashboard: dashboardReducer,
-        category: categoryReducer,
-        order: orderReducer
-
+        order: orderReducer,
+        user: userReducer,
+        feedback: feedbackReducer,
+        fee: feeReducer
     },
 };
 

@@ -16,52 +16,69 @@ exports.OrderService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const order_item_schemas_1 = require("../order-item/schemas/order-item.schemas");
 const order_schemas_1 = require("./schemas/order.schemas");
 let OrderService = class OrderService {
-    constructor(orderModel, orderItemModel) {
+    constructor(orderModel) {
         this.orderModel = orderModel;
-        this.orderItemModel = orderItemModel;
     }
     async findAll() {
         return this.orderModel.find();
     }
-    async findById(id) {
-        let order = await this.orderModel.findById(id);
-        let orderItems = await this.orderItemModel.find({ '_id': { $in: [order.orders] } }).populate("product", "title price", "Product");
-        return { order, orders: orderItems };
+    async search(textSearch) {
+        let regex = new RegExp(textSearch, "i");
+        return await this.orderModel.find({ code: regex });
     }
-    async create(orderDto, orders, user) {
-        var orderSave = new this.orderModel(Object.assign(Object.assign({}, orderDto), { user }));
-        orders.forEach(order => {
-            let orderItem = new this.orderItemModel({ product: order.product, amount: order.amount });
-            orderSave.orders.push(orderItem._id);
-            orderItem.save();
-        });
-        return orderSave.save();
+    async findByUser(userId) {
+        return this.orderModel.find({ createdBy: userId });
     }
-    async update(id, orderDto) {
-        let order = await this.orderModel.findById(id.toString());
-        order.fullName = orderDto.fullName;
-        order.phoneNumber = orderDto.phoneNumber;
-        order.email = orderDto.email;
-        order.address = orderDto.address;
-        order.note = orderDto.note;
-        order.price = orderDto.price;
-        order.status = orderDto.status;
+    async createOrder(orderDto, userId) {
+        let order = new this.orderModel(Object.assign({}, orderDto));
+        order.createdBy = userId;
         return order.save();
     }
-    async delete(id) {
+    async changeStatus(id, status) {
         let order = await this.orderModel.findById(id.toString());
+        order.status = status;
+        return order.save();
+    }
+    async feedback(id, feedback) {
+        let order = await this.orderModel.findById(id.toString());
+        order.feedback = feedback;
+        return order.save();
+    }
+    async updateOrder(orderDto, orderId) {
+        let order = await this.orderModel.findById(orderId);
+        order.peopleSend.fullName = orderDto.peopleSend.fullName;
+        order.peopleSend.phoneNumber = orderDto.peopleSend.phoneNumber;
+        order.peopleSend.city = orderDto.peopleSend.city;
+        order.peopleSend.district = orderDto.peopleSend.district;
+        order.peopleSend.address = orderDto.peopleSend.address;
+        order.peopleRecieve.fullName = orderDto.peopleRecieve.fullName;
+        order.peopleRecieve.phoneNumber = orderDto.peopleRecieve.phoneNumber;
+        order.peopleRecieve.city = orderDto.peopleRecieve.city;
+        order.peopleRecieve.district = orderDto.peopleRecieve.district;
+        order.peopleRecieve.address = orderDto.peopleRecieve.address;
+        order.code = orderDto.code;
+        order.title = orderDto.title;
+        order.weight = orderDto.weight;
+        order.priceNotIncludeService = orderDto.priceNotIncludeService;
+        order.service.priceService = orderDto.service.priceService;
+        order.service.serviceName = orderDto.service.serviceName;
+        order.ecommerce = orderDto.ecommerce;
+        order.amount = orderDto.amount;
+        order.totalPrice = orderDto.totalPrice;
+        order.note = orderDto.note;
+        return order.save();
+    }
+    async delete(orderId) {
+        let order = await this.orderModel.findById(orderId);
         return order.remove();
     }
 };
 OrderService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(order_schemas_1.Order.name)),
-    __param(1, (0, mongoose_1.InjectModel)(order_item_schemas_1.OrderItem.name)),
-    __metadata("design:paramtypes", [mongoose_2.Model,
-        mongoose_2.Model])
+    __metadata("design:paramtypes", [mongoose_2.Model])
 ], OrderService);
 exports.OrderService = OrderService;
 //# sourceMappingURL=order.service.js.map

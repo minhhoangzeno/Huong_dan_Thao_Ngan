@@ -7,11 +7,11 @@ import ForgotPassword from "./examples/ForgotPassword";
 import Lock from "./examples/Lock";
 import NotFoundPage from "./examples/NotFound";
 import PendingAccount from './examples/PendingAccount';
+import ResetPassword from './examples/ResetPassword';
 import Signin from "./examples/Signin";
 import Signup from "./examples/Signup";
 import VerifyEmail from './examples/VerifyEmail';
 import VerifyPassword from './examples/VerifyPassword';
-import ResetPassword from './examples/ResetPassword'
 import ProvideAuth from './ProvideAuth';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
@@ -60,7 +60,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
 };
 
 export default () => {
-
+  
   return (
     <>
       <Switch>

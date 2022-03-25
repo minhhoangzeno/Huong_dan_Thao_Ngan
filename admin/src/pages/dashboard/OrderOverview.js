@@ -18,7 +18,7 @@ export default () => {
             setData(res);
             let total = 0;
             res.forEach(item => {
-                total += item.price;
+                total += item.totalPrice;
             })
             setTotalPrices(total);
         }
@@ -57,7 +57,7 @@ const CounterWidget = (props) => {
                         </div>
                         <div className="d-sm-none">
                             <h5>{category}</h5>
-                            <h3 className="mb-1">{title}</h3>
+                            <h3 className="mb-1">{title} đơn hàng</h3>
                         </div>
                     </Col>
                     <Col xs={12} xl={7} className="px-xl-0">

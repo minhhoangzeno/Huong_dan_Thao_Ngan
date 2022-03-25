@@ -101,14 +101,14 @@ export default (props) => {
                   <div onClick={() => {
                     history.push(Routes.Settings.path)
                   }}>
-                    <FontAwesomeIcon icon={faUserCircle} className="me-2" /> My Profile
+                    <FontAwesomeIcon icon={faUserCircle} className="me-2" /> Cá nhân
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Item className="fw-bold">
                   <div onClick={() => {
                     history.push(Routes.ChangePassword.path)
                   }} >
-                    <FontAwesomeIcon icon={faCog} className="me-2" /> Change password
+                    <FontAwesomeIcon icon={faCog} className="me-2" /> Thay đổi mật khẩu
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Divider />
@@ -118,7 +118,7 @@ export default (props) => {
                     localStorage.clear();
                     history.push(Routes.Signin.path)
                   }} >
-                    <FontAwesomeIcon icon={faSignOutAlt} className="text-danger me-2" /> Logout
+                    <FontAwesomeIcon icon={faSignOutAlt} className="text-danger me-2" /> Đăng xuất
                   </div>
                 </Dropdown.Item>
               </Dropdown.Menu>

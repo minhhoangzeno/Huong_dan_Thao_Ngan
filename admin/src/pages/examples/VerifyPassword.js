@@ -29,12 +29,12 @@ export default (props) => {
                         </p>
                         <Col xs={12} className="d-flex align-items-center justify-content-center">
                             <div className="signin-inner my-3 my-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-                                <h3>Verify password?</h3>
+                                <h3>Xác nhận mật khẩu?</h3>
                                 <p className="mb-4">Don't fret! Just type in your email and we will send you a code to reset your password!</p>
                                 <Form>
                                     <div className="mb-4">
                                         <Form.Group id="email" className="mb-4">
-                                            <Form.Label>Your Password</Form.Label>
+                                            <Form.Label>Mật khẩu mới</Form.Label>
                                             <Controller
                                                 control={control}
                                                 name="newPassword"
