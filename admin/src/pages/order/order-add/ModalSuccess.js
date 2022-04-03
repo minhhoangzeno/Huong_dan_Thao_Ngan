@@ -10,20 +10,17 @@ export default ({ show, handleClose, code }) => {
         <>
             <Modal show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Success</Modal.Title>
+                    <Modal.Title>Thành công</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Bạn đã tạo đơn hàng : <strong>{code}</strong> thành công!</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => {
                         handleClose();
-                        history.push(Routes.Order.path);
+                        history.push(Routes.OrderUser.path);
 
                     }}>
-                        Close
+                        Đóng
                     </Button>
-                    {/* <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button> */}
                 </Modal.Footer>
             </Modal>
         </>

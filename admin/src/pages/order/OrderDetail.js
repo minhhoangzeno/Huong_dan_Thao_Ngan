@@ -1,13 +1,26 @@
 import { Button, Container, Form, InputGroup, Row } from '@themesberg/react-bootstrap';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 export default () => {
     let location = useLocation();
     let order = location.state;
-
-    let history = useHistory()
-
+    const [locationData, setLocationData] = useState();
+    let history = useHistory();
+    let searchLocation = async () => {
+        let responsive = await axios.get('https://provinces.open-api.vn/api/?depth=2');
+        if (responsive.status === 200) {
+            setLocationData(responsive.data)
+        }
+    }
+    useEffect(() => {
+        searchLocation()
+    }, [])
+    let city = locationData?.filter(item => item.code == order?.peopleSend?.city)[0]
+    let districtSend = city?.districts?.filter(item => item.code == order?.peopleSend?.district)[0]?.name;
+    let cityRecieve = locationData?.filter(item => item.code == order?.peopleRecieve?.city)[0]
+    let districRecieve = cityRecieve?.districts?.filter(item => item.code == order?.peopleRecieve?.district)[0]?.name;
     return (
         <Container>
             <Row>
@@ -26,10 +39,10 @@ export default () => {
                             </thead>
                             <tbody>
                                 <td>{order?.peopleSend.fullName}</td>
-                                <td>{order?.peopleSend.district} - {order?.peopleSend.city}</td>
+                                <td>{districtSend} - {city?.name}</td>
                                 <td>{order?.peopleSend.address}</td>
                                 <td>{order?.peopleRecieve.fullName}</td>
-                                <td>{order?.peopleRecieve.district} - {order?.peopleRecieve.city}</td>
+                                <td> {districRecieve} - {cityRecieve?.name}</td>
                                 <td>{order?.peopleRecieve.address}</td>
                             </tbody>
                         </table>
@@ -57,7 +70,7 @@ export default () => {
                     <label>Trạng thái</label>
                     <InputGroup >
                         <Form.Control autoFocus required type="text"
-                           
+
                             value={order?.status}
                             disabled
                         />
@@ -66,7 +79,7 @@ export default () => {
                     <label>Ghi chú</label>
                     <InputGroup >
                         <Form.Control autoFocus required type="text"
-                           
+
                             value={order?.note}
                             disabled
                         />

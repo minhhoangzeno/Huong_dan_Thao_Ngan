@@ -9,7 +9,7 @@ import SimpleBar from 'simplebar-react';
 import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
 import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
 import { Routes } from "../routes";
-
+import logo from '../assets/logo1.png';
 
 export default (props = {}) => {
   const location = useLocation();
@@ -92,8 +92,12 @@ export default (props = {}) => {
               <NavItem title="Phản hồi" icon={faSimCard} link={Routes.Feedback.path} />
 
             </Nav>
+            <div style={{display:'flex',justifyContent:'center',marginTop:150}} >
+              <img src={logo} width={'50%'} />
+            </div>
           </div>
         </SimpleBar>
+
       </CSSTransition>
     </>
   );

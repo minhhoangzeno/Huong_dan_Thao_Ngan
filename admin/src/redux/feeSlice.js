@@ -28,7 +28,6 @@ export const { setData, setError } = feeSlice.actions;
 export const getFeeThunk = () => async (dispatch) => {
     try {
         const data = await getFee();
-        console.log("a",data)
         dispatch(setData(data))
         return data;
     } catch (err) {

@@ -12,6 +12,17 @@ export class OrderController {
         return this.orderService.findAll();
     }
 
+    @Get('amount/:year')
+    async getOrderByAmount(@Param('year') year) {
+        return this.orderService.findOrderByAmount(year);
+    }
+
+
+    @Get('revenue/:year')
+    async getOrderByRevenue(@Param('year') year) {
+        return this.orderService.findOrderByRevenue(year);
+    }
+
     @UseGuards(JwtAuthGuard)
     @Post('search')
     async searchOrder(@Body() body) {

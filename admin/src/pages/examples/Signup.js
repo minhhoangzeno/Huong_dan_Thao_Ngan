@@ -163,7 +163,7 @@ export default () => {
                             <InputGroup.Text style={{ borderColor: errors.email?.type === "required" && 'red' }}>
                               <FontAwesomeIcon icon={faUser} />
                             </InputGroup.Text>
-                            <Form.Control autoFocus required type="text" placeholder="Hoàng" onChange={e => onChange(e.target.value)}
+                            <Form.Control autoFocus required type="text" placeholder="Thao" onChange={e => onChange(e.target.value)}
                               onBlur={onBlur}
                               style={{ borderColor: errors.email?.type === "required" && 'red' }}
                             />
@@ -184,7 +184,7 @@ export default () => {
                             <InputGroup.Text style={{ borderColor: errors.email?.type === "required" && 'red' }}>
                               <FontAwesomeIcon icon={faUser} />
                             </InputGroup.Text>
-                            <Form.Control autoFocus required type="text" placeholder="Minh" onChange={e => onChange(e.target.value)}
+                            <Form.Control autoFocus required type="text" placeholder="Ngan" onChange={e => onChange(e.target.value)}
                               onBlur={onBlur}
                               style={{ borderColor: errors.email?.type === "required" && 'red' }}
                             />

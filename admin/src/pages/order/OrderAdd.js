@@ -9,35 +9,12 @@ import PeopleSend from './order-add/PeopleSend';
 import SerivceSelect from './order-add/SerivceSelect';
 import TotalPrice from './order-add/TotalPrice';
 export default () => {
-    const [fee, setFee] = useState(fee);
-    let dispatch = useDispatch();
-    let searchFee = async () => {
-        let dataFee = await dispatch(getFeeThunk());
-        console.log(dataFee)
-        // if (dataFee) {
-        //     setFee(dataFee)
-        // }
-    }
-    useEffect(() => {
-        searchFee() // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-    const [codeAddress, setCodeAddress] = useState({
-        idSend: 1,
-        idRecieve: 1
-    });
-    const [price, setPrice] = useState(convertPriceAddress(codeAddress.idSend, codeAddress.idRecieve));
-    // let handlePrice = () => {
-    //     let priceNM = fee?.filter(item => item.title == "Nội miền")?.[0]?.price;
-    //     let priceBN = fee?.filter(item => item.title == "Bắc - Nam")?.[0]?.price;
-    //     let priceBT = fee?.filter(item => item.title == "Bắc - Trung")?.[0]?.price;
-    //     let priceTN = fee?.filter(item => item.title == "Trung - Nam")?.[0]?.price;
-    //     console.log(priceNM, priceBN, priceBT, priceTN)
-    // }
-  
-    const [service, setService] = useState(20000);
-    const [ecommerce, setEcommerce] = useState(0);
-    const [order, setOrder] = useState();
+    const [feeNM, setFeeNM] = useState();
+    const [feeBT, setFeeBT] = useState();
+    const [feeBN, setFeeBN] = useState();
+    const [feeTN, setFeeTN] = useState();
     let user = JSON.parse(localStorage.getItem("user"));
+
     const [peopleSend, setPeopleSend] = useState({
         city: user.city,
         district: user.district,
@@ -48,16 +25,47 @@ export default () => {
         city: 1,
         district: 1
     });
+    let dispatch = useDispatch();
+    let searchFee = async () => {
+        let dataFee = await dispatch(getFeeThunk());
+        if (dataFee) {
+            let dataFeeNM = dataFee.filter(item => item.title == "Nội miền")[0]?.price;
+            let dataFeeBT = dataFee.filter(item => item.title == "Bắc - Trung")[0]?.price;
+            let dataFeeBN = dataFee.filter(item => item.title == "Bắc - Nam")[0]?.price;
+            let dataFeeTN = dataFee.filter(item => item.title == "Trung - Nam")[0]?.price;
+            setFeeNM(dataFeeNM);
+            setFeeBT(dataFeeBT);
+            setFeeBN(dataFeeBN);
+            setFeeTN(dataFeeTN);
+        }
+    }
+    useEffect(() => {
+        searchFee() // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+   
+    const [price, setPrice] = useState();
+    let handlePrice = () => {
+        setPrice(convertPriceAddress(Number(peopleSend.city), Number(peopleRecieve.city),feeNM,feeBT,feeBN,feeTN))
+    }
+    useEffect(() => {
+        handlePrice()
+    }, [convertPriceAddress(Number(peopleSend.city), Number(peopleRecieve.city),feeNM,feeBT,feeBN,feeTN)])
+
+    const [service, setService] = useState(20000);
+    const [ecommerce, setEcommerce] = useState(0);
+    const [order, setOrder] = useState();
+
 
     return (
         <>
             <Container>
                 <Row>
                     <h3 className="mb-3">Tạo đơn hàng</h3>
+
                     <Col className="lg-6" >
                         <Row>
                             <Col className='lg-12' >
-                                <PeopleSend setCodeAddress={setCodeAddress} codeAddress={codeAddress}
+                                <PeopleSend 
                                     setPeopleSend={setPeopleSend} peopleSend={peopleSend}
                                     user={user}
                                 />
@@ -66,7 +74,7 @@ export default () => {
 
                             </div>
                             <Col className='lg-12' >
-                                <PeopleRecieve setCodeAddress={setCodeAddress} codeAddress={codeAddress}
+                                <PeopleRecieve
                                     peopleRecieve={peopleRecieve} setPeopleRecieve={setPeopleRecieve}
                                 />
                             </Col>

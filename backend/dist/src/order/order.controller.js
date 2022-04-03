@@ -24,6 +24,12 @@ let OrderController = class OrderController {
     async getOrder() {
         return this.orderService.findAll();
     }
+    async getOrderByAmount(year) {
+        return this.orderService.findOrderByAmount(year);
+    }
+    async getOrderByRevenue(year) {
+        return this.orderService.findOrderByRevenue(year);
+    }
     async searchOrder(body) {
         return this.orderService.search(body.textSearch);
     }
@@ -52,6 +58,20 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], OrderController.prototype, "getOrder", null);
+__decorate([
+    (0, common_1.Get)('amount/:year'),
+    __param(0, (0, common_1.Param)('year')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "getOrderByAmount", null);
+__decorate([
+    (0, common_1.Get)('revenue/:year'),
+    __param(0, (0, common_1.Param)('year')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "getOrderByRevenue", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('search'),

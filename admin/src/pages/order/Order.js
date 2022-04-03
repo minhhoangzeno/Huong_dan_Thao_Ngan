@@ -4,6 +4,7 @@ import { faEdit, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Col } from '@themesberg/react-bootstrap';
 import { Button, ButtonGroup, Card, Container, Dropdown, Row, Table } from '@themesberg/react-bootstrap';
+import axios from 'axios';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +20,14 @@ export default () => {
     let { addToast } = useToasts();
     const [textSearch, setTextSearch] = useState("");
     let dispatch = useDispatch();
+    const [locationData, setLocationData] = useState();
+    let searchLocation = async () => {
+        let responsive = await axios.get('https://provinces.open-api.vn/api/?depth=2');
+        if (responsive.status === 200) {
+            setLocationData(responsive.data)
+        }
+    }
+
     let search = () => {
         dispatch(getOrderThunk({
             textSearch: textSearch
@@ -26,6 +35,7 @@ export default () => {
     }
     useEffect(() => {
         search(textSearch) // eslint-disable-next-line react-hooks/exhaustive-deps
+        searchLocation()
     }, []);
 
     let deleteOrder = async (orderId) => {
@@ -87,31 +97,12 @@ export default () => {
                                                 deleteOrder={deleteOrder}
                                                 routerDetailOrder={routerDetailOrder}
                                                 search={search}
+                                                locationData={locationData}
                                             />
                                         )
                                     })}
                                 </tbody>
                             </Table>
-                            {/* <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-                        <Nav>
-                            <Pagination className="mb-2 mb-lg-0">
-                                <Pagination.Prev>
-                                    Previous
-                                </Pagination.Prev>
-                                <Pagination.Item active>1</Pagination.Item>
-                                <Pagination.Item>2</Pagination.Item>
-                                <Pagination.Item>3</Pagination.Item>
-                                <Pagination.Item>4</Pagination.Item>
-                                <Pagination.Item>5</Pagination.Item>
-                                <Pagination.Next>
-                                    Next
-                                </Pagination.Next>
-                            </Pagination>
-                        </Nav>
-                        <small className="fw-bold">
-                            Showing <b>{totalTransactions}</b> out of <b>25</b> entries
-                        </small>
-                    </Card.Footer> */}
                         </Card.Body>
                     </Card>
                 </Row>
@@ -121,10 +112,13 @@ export default () => {
 }
 
 
-function TableItem({ index, order, deleteOrder, routerDetailOrder, search }) {
+function TableItem({ index, order, deleteOrder, routerDetailOrder, search, locationData }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-
+    let city = locationData?.filter(item => item.code == order?.peopleSend?.city)[0]
+    let districtSend = city?.districts?.filter(item => item.code == order?.peopleSend?.district)[0]?.name;
+    let cityRecieve = locationData?.filter(item => item.code == order?.peopleRecieve?.city)[0]
+    let districRecieve = cityRecieve?.districts?.filter(item => item.code == order?.peopleRecieve?.district)[0]?.name;
     return (
         <>
             <OrderEdit show={show} handleClose={handleClose} order={order} search={search} />
@@ -135,8 +129,12 @@ function TableItem({ index, order, deleteOrder, routerDetailOrder, search }) {
                 <td>
                     <Card.Link href="#" className="text-primary fw-bold">{order?.code}</Card.Link>
                 </td>
-                <td>{order?.peopleSend?.district} - {order.peopleSend?.city}</td>
-                <td>{order.peopleRecieve?.district} - {order.peopleRecieve?.city}</td>
+                <td>
+                    {districtSend} - {city?.name}
+                </td>
+                <td>
+                    {districRecieve} - {cityRecieve?.name}
+                </td>
                 <td>{order.totalPrice}</td>
                 <td>{order.status}</td>
                 <td>{moment(order?.createdAt).format("HH:mm DD-MM-YYYY")}</td>

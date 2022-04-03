@@ -6,6 +6,18 @@ export const dashboardUser = async () => {
 };
 
 
+
+export const dashboardOrderByAmount = async (dto) => {
+    let response = await publicGetApi(`/order/amount/${dto}`);
+    return response;
+};
+
+
+export const dashboardOrderByRevenue = async (dto) => {
+    let response = await publicGetApi(`/order/revenue/${dto}`);
+    return response;
+};
+
 export const dashboardProduct = async () => {
     let response = await publicGetApi('/product');
     return response;

@@ -1,5 +1,7 @@
 import { Col, Row } from '@themesberg/react-bootstrap';
 import React from "react";
+import DashboardOrderByAmount from './DashboardOrderByAmount';
+import DashboardOrderByRevenue from './DashboardOrderByRevenue';
 import OrderOverview from './OrderOverview';
 import OrderUserOverview from './OrderUserOverview';
 import UserOverview from './UserOverview';
@@ -19,6 +21,11 @@ export default () => {
         </Col> */}
         {(user.roles === "superadmin" || user.roles === "admin") && <UserOverview />}
         {(user.roles === "superadmin" || user.roles === "admin") ?  <OrderOverview /> : <OrderUserOverview /> }
+
+        {(user.roles === "superadmin" || user.roles === "admin") && <DashboardOrderByAmount />}
+
+        {/* {(user.roles === "superadmin" || user.roles === "admin") && <DashboardOrderByAmount />} */}
+        {(user.roles === "superadmin" || user.roles === "admin") && <DashboardOrderByRevenue />}
 
        
       </Row>

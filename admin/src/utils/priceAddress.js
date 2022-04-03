@@ -1,41 +1,28 @@
-export const convertPriceAddress = (idSend, idRecieve) => {
-    // let priceBN = localStorage.getItem("priceBN");
-    // let priceBT = localStorage.getItem("priceBT");
-    // let priceNT = localStorage.getItem("priceNT");
-    // let priceNM = localStorage.getItem("priceNM");
+export const convertPriceAddress = (idSend, idRecieve,feeNM,feeBT,feeBN,feeTN) => {
     let price = 0;
     if (idSend < 39) {
         if (idRecieve < 39) {
-            // price = Number(priceBN);
-            price = 30000
+            price = feeNM
         } else if (idRecieve < 53) {
-            // price = Number(priceBT)
-            price = 40000
+            price = feeBT
         } else if (idRecieve > 52) {
-            // price = Number(priceBN)
-            price = 50000
+            price = feeBN
         }
     } else if (idSend < 53) {
         if (idRecieve < 39) {
-            // price = Number(priceBT)
-            price = 40000
+            price = feeBT
         } else if (idRecieve < 53) {
-            // price = Number(priceNM)
-            price = 30000
+            price = feeNM
         } else if (idRecieve > 52) {
-            // price = Number(priceNT)
-            price = 40000
+            price = feeTN
         }
     } else if (idSend > 52) {
         if (idRecieve < 39) {
-            // price = Number(priceBN)
-            price = 50000
+            price = feeBT
         } else if (idRecieve < 53) {
-            // price = Number(priceNT)
-            price = 40000
+            price = feeTN
         } else if (idRecieve > 52) {
-            // price = Number(priceNM)
-            price = 30000
+            price = feeNM
         }
     }
     return price;
