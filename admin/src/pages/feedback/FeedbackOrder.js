@@ -13,8 +13,8 @@ export default () => {
             Bạn muốn đóng góp ý kiến cho chúng tôi. Mọi thông tin sẽ đều được bảo mật.
             <div>
                 <ul style={{ listStyle: 'none' }} >
-                    <li><FontAwesomeIcon icon={faPhoneAlt} /> 0972335594</li>
-                    <li><FontAwesomeIcon icon={faMailBulk} /> minhhoangzeno@gmail.com</li>
+                    <li><FontAwesomeIcon icon={faPhoneAlt} /> 0942000368</li>
+                    <li><FontAwesomeIcon icon={faMailBulk} /> thaongan@gmail.com</li>
                 </ul>
                 <Button variant="secondary" onClick={() => {setShow(true)}}>
                     Đóng góp

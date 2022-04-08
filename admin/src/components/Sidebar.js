@@ -10,6 +10,12 @@ import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
 import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
 import { Routes } from "../routes";
 import logo from '../assets/logo1.png';
+import { faBarcode } from "@fortawesome/free-solid-svg-icons";
+import { faBlog } from "@fortawesome/free-solid-svg-icons";
+import { faBlogger } from "@fortawesome/free-brands-svg-icons";
+import { faJediOrder } from "@fortawesome/free-brands-svg-icons";
+import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default (props = {}) => {
   const location = useLocation();
@@ -76,19 +82,21 @@ export default (props = {}) => {
               {/* <NavItem title="Taekwondo" link={Routes} image={ReactHero} /> */}
 
               <NavItem title="Tổng quan" link={Routes.DashboardOverview.path} icon={faChartPie} />
-              {(user.roles === "superadmin") && <NavItem title="Cấp quyền người dùng" icon={faUserAstronaut} link={Routes.User.path} />}
-              {(user.roles === "superadmin") && <NavItem title="Thay đổi cước phí" icon={faUserAstronaut} link={Routes.Fee.path} />}
+              <NavItem title="Thống kê của tôi" link={Routes.DashboardUserOverview.path} icon={faBarcode} />
 
-              {(user.roles === "admin" || user.roles === "superadmin") && <NavItem title="Bài viết" link={Routes.Blog.path} icon={faChartPie} />}
-              <NavItem title="Tin tức" icon={faHandHoldingUsd} link={Routes.BlogUser.path} />
+              {(user.roles === "superadmin") && <NavItem title="Cấp quyền người dùng" icon={faUserAstronaut} link={Routes.User.path} />}
+              {(user.roles === "admin" || user.roles === "superadmin") && <NavItem title="Thay đổi cước phí" icon={faUserAstronaut} link={Routes.Fee.path} />}
+
+              {(user.roles === "admin" || user.roles === "superadmin") && <NavItem title="Bài viết" link={Routes.Blog.path} icon={faBlog} />}
+              <NavItem title="Tin tức" icon={faBlogger} link={Routes.BlogUser.path} />
 
               <Dropdown.Divider className="my-3 border-indigo" />
 
-              {(user.roles === "admin" || user.roles === "superadmin") && <NavItem title="Đơn hàng" icon={faHandHoldingUsd} link={Routes.Order.path} />}
+              {(user.roles === "admin" || user.roles === "superadmin") && <NavItem title="Đơn hàng" icon={faJediOrder} link={Routes.Order.path} />}
 
-              {(user.roles === "admin" || user.roles === "superadmin") && <NavItem title="Phản hồi người dùng" icon={faHandHoldingUsd} link={Routes.FeedbackUser.path} />}
+              {(user.roles === "admin" || user.roles === "superadmin") && <NavItem title="Phản hồi người dùng" icon={faFacebookMessenger} link={Routes.FeedbackUser.path} />}
 
-              <NavItem title="Đơn hàng của tôi" icon={faHandHoldingUsd} link={Routes.OrderUser.path} />
+              <NavItem title="Đơn hàng của tôi" icon={faUserCircle} link={Routes.OrderUser.path} />
               <NavItem title="Phản hồi" icon={faSimCard} link={Routes.Feedback.path} />
 
             </Nav>

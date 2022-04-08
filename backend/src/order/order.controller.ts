@@ -24,6 +24,18 @@ export class OrderController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @Get('amount-user/:year')
+    async getOrderByAmountUser(@Param('year') year, @Request() req) {
+        return this.orderService.findOrderByAmountByUser(year, req.user._doc._id);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('revenue-user/:year')
+    async getOrderByRevenueUser(@Param('year') year, @Request() req) {
+        return this.orderService.findOrderByRevenueByUser(year, req.user._doc._id);
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Post('search')
     async searchOrder(@Body() body) {
         return this.orderService.search(body.textSearch);

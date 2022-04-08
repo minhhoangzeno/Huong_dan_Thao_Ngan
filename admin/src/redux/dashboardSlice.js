@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { dashboardDetailCountdown, dashboardOrder, dashboardOrderByAmount, dashboardOrderByRevenue, dashboardOrderByUser, dashboardProduct, dashboardUser, dashboardVoteUser } from '../services/dashboard.service';
+import { dashboardDetailCountdown, dashboardOrder, dashboardOrderByAmount, dashboardOrderByAmountByUser, dashboardOrderByRevenue, dashboardOrderByRevenueByUser, dashboardOrderByUser, dashboardProduct, dashboardUser, dashboardVoteUser } from '../services/dashboard.service';
 
 const initialState = {
     data: null,
@@ -104,6 +104,30 @@ export const getDashboardOrderByAmountThunk = (dto) => async (dispatch) => {
 export const getDashboardOrderByRenevueThunk = (dto) => async (dispatch) => {
     try {
         const data = await dashboardOrderByRevenue(dto);
+        return data;
+    } catch (err) {
+       console.log(err)
+    }
+    //done
+}
+
+
+
+export const getDashboardOrderByAmountByUserThunk = (dto) => async (dispatch) => {
+    try {
+        const data = await dashboardOrderByAmountByUser(dto);
+        return data;
+    } catch (err) {
+       console.log(err)
+    }
+    //done
+}
+
+
+
+export const getDashboardOrderByRenevueByUserThunk = (dto) => async (dispatch) => {
+    try {
+        const data = await dashboardOrderByRevenueByUser(dto);
         return data;
     } catch (err) {
        console.log(err)

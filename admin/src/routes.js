@@ -2,6 +2,8 @@
 export const Routes = {
     // pages
     DashboardOverview: { path: "/" },
+    DashboardUserOverview: { path: "/statistical" },
+
     Transactions: { path: "/transactions" },
     BootstrapTables: { path: "/tables/bootstrap-tables" },
     Billing: { path: "/examples/billing" },

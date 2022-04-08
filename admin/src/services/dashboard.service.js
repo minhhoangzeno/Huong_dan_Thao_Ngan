@@ -18,6 +18,20 @@ export const dashboardOrderByRevenue = async (dto) => {
     return response;
 };
 
+
+
+export const dashboardOrderByAmountByUser = async (dto) => {
+    let response = await privateGetApi(`/order/amount-user/${dto}`);
+    return response;
+};
+
+
+export const dashboardOrderByRevenueByUser = async (dto) => {
+    let response = await privateGetApi(`/order/revenue-user/${dto}`);
+    return response;
+};
+
+
 export const dashboardProduct = async () => {
     let response = await publicGetApi('/product');
     return response;

@@ -30,6 +30,12 @@ let OrderController = class OrderController {
     async getOrderByRevenue(year) {
         return this.orderService.findOrderByRevenue(year);
     }
+    async getOrderByAmountUser(year, req) {
+        return this.orderService.findOrderByAmountByUser(year, req.user._doc._id);
+    }
+    async getOrderByRevenueUser(year, req) {
+        return this.orderService.findOrderByRevenueByUser(year, req.user._doc._id);
+    }
     async searchOrder(body) {
         return this.orderService.search(body.textSearch);
     }
@@ -72,6 +78,24 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], OrderController.prototype, "getOrderByRevenue", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Get)('amount-user/:year'),
+    __param(0, (0, common_1.Param)('year')),
+    __param(1, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "getOrderByAmountUser", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Get)('revenue-user/:year'),
+    __param(0, (0, common_1.Param)('year')),
+    __param(1, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "getOrderByRevenueUser", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('search'),

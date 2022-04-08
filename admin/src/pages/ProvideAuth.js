@@ -30,6 +30,7 @@ import Tabs from "./components/Tabs";
 import Toasts from "./components/Toasts";
 import Tooltips from "./components/Tooltips";
 import DashboardOverview from "./dashboard/DashboardOverview";
+import DashboardUserOverview from "./dashboard/DashboardUserOverview";
 import ChangePassword from "./examples/ChangePassword";
 import Fee from "./fee/Fee";
 import Feedback from './feedback/Feedback';
@@ -107,6 +108,8 @@ export default function ProvideAuth() {
 
             {/* pages */}
             <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
+            <RouteWithSidebar exact path={Routes.DashboardUserOverview.path} component={DashboardUserOverview} />
+
             <RouteWithSidebar exact path={Routes.Transactions.path} component={Transactions} />
             <RouteWithSidebar exact path={Routes.BootstrapTables.path} component={BootstrapTables} />
 
