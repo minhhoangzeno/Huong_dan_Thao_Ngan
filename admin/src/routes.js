@@ -55,6 +55,7 @@ export const Routes = {
 
     Order: { path: "/order" },
     OrderDetail: { path: "/order/detail" },
+    OrderEditUser: { path: "/order/edit-user" },
     OrderAdd: { path: "/order/add" },
     OrderUser: { path: "/order-user" },
 

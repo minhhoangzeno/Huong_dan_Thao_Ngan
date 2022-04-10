@@ -736,6 +736,20 @@ let OrderService = class OrderService {
         order.createdBy = userId;
         return order.save();
     }
+    async editOrder(orderId, orderDto) {
+        let order = await this.orderModel.findById(orderId.toString());
+        order.peopleSend = orderDto.peopleSend;
+        order.peopleRecieve = orderDto.peopleRecieve;
+        order.title = orderDto.title;
+        order.weight = orderDto.weight;
+        order.priceNotIncludeService = orderDto.priceNotIncludeService;
+        order.service = orderDto.service;
+        order.ecommerce = orderDto === null || orderDto === void 0 ? void 0 : orderDto.ecommerce;
+        order.amount = orderDto.amount;
+        order.totalPrice = orderDto.totalPrice;
+        order.note = orderDto.note;
+        return order.save();
+    }
     async changeStatus(id, status) {
         let order = await this.orderModel.findById(id.toString());
         order.status = status;

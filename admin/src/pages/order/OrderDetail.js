@@ -33,17 +33,21 @@ export default () => {
                                 <th>Người gửi</th>
                                 <th>Nơi gửi</th>
                                 <th>Địa chỉ gửi</th>
+                                <th>SĐT người gửi</th>
                                 <th>Người nhận</th>
                                 <th>Nơi nhận</th>
                                 <th>Địa chỉ nhận</th>
+                                <th>SĐT người nhận</th>
                             </thead>
                             <tbody>
                                 <td>{order?.peopleSend.fullName}</td>
                                 <td>{districtSend} - {city?.name}</td>
                                 <td>{order?.peopleSend.address}</td>
+                                <td>{order?.peopleSend?.phoneNumber}</td>
                                 <td>{order?.peopleRecieve.fullName}</td>
                                 <td> {districRecieve} - {cityRecieve?.name}</td>
-                                <td>{order?.peopleRecieve.address}</td>
+                                <td>{order?.peopleRecieve?.address}</td>
+                                <td>{order?.peopleRecieve?.phoneNumber}</td>
                             </tbody>
                         </table>
                         <div style={{ height: 50 }} ></div>

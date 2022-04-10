@@ -20,6 +20,9 @@ export declare class OrderService {
     createOrder(orderDto: OrderDto, userId: any): Promise<Order & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;
+    editOrder(orderId: any, orderDto: OrderDto): Promise<Order & import("mongoose").Document<any, any, any> & {
+        _id: any;
+    }>;
     changeStatus(id: any, status: any): Promise<Order & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;

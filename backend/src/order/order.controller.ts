@@ -59,6 +59,12 @@ export class OrderController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @Post('edit-user/:id')
+    async editOrder(@Param('id') id, @Body() body: OrderDto) {
+        return this.orderService.editOrder(id, body)
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Post('status/:id')
     async changeStatus(@Body() body, @Param('id') id) {
         return this.orderService.changeStatus(id, body.status)

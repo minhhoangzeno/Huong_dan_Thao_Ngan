@@ -6,6 +6,7 @@ import { addOrderThunk } from '../../../redux/orderSlice';
 import { Routes } from '../../../routes';
 import ModalSuccess from './ModalSuccess';
 export default ({ price, ecommerce, service, order, peopleSend, peopleRecieve }) => {
+    const [code,setCode] = useState();
     function makeid(length) {
         var text = "";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -34,6 +35,7 @@ export default ({ price, ecommerce, service, order, peopleSend, peopleRecieve })
         ecommerce: Number(ecommerce),
         totalPrice: (order?.weight && order?.amount) ? (price + service + 5000 * (order?.weight * order?.amount) + Number(ecommerce)) : (price + service + Number(ecommerce))
     }
+
     let { addToast } = useToasts();
     let [check, setCheck] = useState(false)
     let history = useHistory();
@@ -47,6 +49,8 @@ export default ({ price, ecommerce, service, order, peopleSend, peopleRecieve })
         if (check) {
             let response = await dispatch(addOrderThunk(data));
             if (response) {
+              
+                setCode(response?.code)
                 setShow(true)
             }
         } else {
@@ -57,7 +61,7 @@ export default ({ price, ecommerce, service, order, peopleSend, peopleRecieve })
     return (
         <>
             <div className='totalPrice' >
-                <ModalSuccess show={show} handleClose={handleClose} code={data.code} />
+                <ModalSuccess show={show} handleClose={handleClose} code={code} />
                 <div className='totalPrice__item' >
                     <label>Tổng cước</label>
                     <div>{(order?.weight && order?.amount) ? (price + service + 5000 * (order?.weight * order?.amount)) : (price + service)} đ</div>

@@ -20,6 +20,12 @@ export const editOrder = async (orderId, data) => {
     return response
 };
 
+
+export const editOrderUser = async (orderId, data) => {
+    let response = await privatePostApi(`/order/edit-user/${orderId}`, data)
+    return response
+};
+
 export const changeStatusOrder = async (orderId, data) => {
     let response = await privatePostApi(`/order/status/${orderId}`, data)
     return response

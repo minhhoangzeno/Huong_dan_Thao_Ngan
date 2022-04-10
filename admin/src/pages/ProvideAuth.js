@@ -38,6 +38,7 @@ import FeedbackOrder from "./feedback/FeedbackOrder";
 import Order from "./order/Order";
 import OrderAdd from "./order/OrderAdd";
 import OrderDetail from "./order/OrderDetail";
+import OrderEditUser from "./order/OrderEditUser";
 import OrderUser from "./order/OrderUser";
 import Settings from './Settings';
 import BootstrapTables from "./tables/BootstrapTables";
@@ -150,6 +151,7 @@ export default function ProvideAuth() {
             <RouteWithSidebar exact path={Routes.OrderDetail.path} component={OrderDetail} />
             <RouteWithSidebar exact path={Routes.OrderAdd.path} component={OrderAdd} />
             <RouteWithSidebar exact path={Routes.OrderUser.path} component={OrderUser} />
+            <RouteWithSidebar exact path={Routes.OrderEditUser.path} component={OrderEditUser} />
 
             <RouteWithSidebar exact path={Routes.User.path} component={User} />
 

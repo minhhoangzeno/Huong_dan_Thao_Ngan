@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addOrder, changeFeedbackOrder, changeStatusOrder, deleteOrder, detailOrder, editOrder, getOrder, getOrderByUser } from '../services/order.service';
+import { addOrder, changeFeedbackOrder, changeStatusOrder, deleteOrder, detailOrder, editOrder, editOrderUser, getOrder, getOrderByUser } from '../services/order.service';
 
 const initialState = {
     data: null,
@@ -64,6 +64,16 @@ export const editOrderThunk = (orderId, data) => async (dispatch) => {
     try {
         let response = await editOrder(orderId, data);
         getOrderThunk()
+        return response;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+export const editOrderUserThunk = (orderId, data) => async (dispatch) => {
+    try {
+        let response = await editOrderUser(orderId, data);
         return response;
     } catch (error) {
         console.log(error)

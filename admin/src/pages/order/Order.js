@@ -152,9 +152,9 @@ function TableItem({ index, order, deleteOrder, routerDetailOrder, search, locat
                             <Dropdown.Item onClick={() => setShow(true)} >
                                 <FontAwesomeIcon icon={faEdit} className="me-2" /> Sửa
                             </Dropdown.Item>
-                            <Dropdown.Item className="text-danger" onClick={() => deleteOrder(order._id)}  >
+                            {/* <Dropdown.Item className="text-danger" onClick={() => deleteOrder(order._id)}  >
                                 <FontAwesomeIcon icon={faTrashAlt} className="me-2" /> Xóa
-                            </Dropdown.Item>
+                            </Dropdown.Item> */}
                         </Dropdown.Menu>
                     </Dropdown>
                 </td>

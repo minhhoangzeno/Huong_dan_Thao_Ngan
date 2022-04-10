@@ -48,6 +48,9 @@ let OrderController = class OrderController {
     async edit(body, id) {
         return this.orderService.updateOrder(body, id);
     }
+    async editOrder(id, body) {
+        return this.orderService.editOrder(id, body);
+    }
     async changeStatus(body, id) {
         return this.orderService.changeStatus(id, body.status);
     }
@@ -129,6 +132,15 @@ __decorate([
     __metadata("design:paramtypes", [order_dto_1.OrderDto, Object]),
     __metadata("design:returntype", Promise)
 ], OrderController.prototype, "edit", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('edit-user/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, order_dto_1.OrderDto]),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "editOrder", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('status/:id'),

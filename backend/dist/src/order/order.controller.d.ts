@@ -22,6 +22,9 @@ export declare class OrderController {
     edit(body: OrderDto, id: any): Promise<import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;
+    editOrder(id: any, body: OrderDto): Promise<import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
+        _id: any;
+    }>;
     changeStatus(body: any, id: any): Promise<import("./schemas/order.schemas").Order & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;

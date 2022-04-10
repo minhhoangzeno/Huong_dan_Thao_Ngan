@@ -509,7 +509,6 @@ export class OrderService {
                 label: 'Tháng 12',
                 amount: monthDecember.length
             },
-
         ]);
         return resp;
 
@@ -737,6 +736,21 @@ export class OrderService {
     async createOrder(orderDto: OrderDto, userId) {
         let order = new this.orderModel({ ...orderDto });
         order.createdBy = userId;
+        return order.save();
+    }
+
+    async editOrder(orderId, orderDto: OrderDto) {
+        let order = await this.orderModel.findById(orderId.toString());
+        order.peopleSend = orderDto.peopleSend;
+        order.peopleRecieve = orderDto.peopleRecieve;
+        order.title = orderDto.title;
+        order.weight = orderDto.weight;
+        order.priceNotIncludeService = orderDto.priceNotIncludeService;
+        order.service = orderDto.service;
+        order.ecommerce = orderDto?.ecommerce;
+        order.amount = orderDto.amount;
+        order.totalPrice = orderDto.totalPrice;
+        order.note = orderDto.note;
         return order.save();
     }
 

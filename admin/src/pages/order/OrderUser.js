@@ -1,7 +1,10 @@
+import { faEdit } from '@fortawesome/free-regular-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, ButtonGroup, Card, Col, Container, Dropdown, Row, Table } from '@themesberg/react-bootstrap';
+import axios from 'axios';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -20,18 +23,33 @@ export default () => {
         let data = await dispatch(getOrderByUserThunk(user._id));
         setOrder(data)
     }
+    const [locationData, setLocationData] = useState();
+    let searchLocation = async () => {
+        let responsive = await axios.get('https://provinces.open-api.vn/api/?depth=2');
+        if (responsive.status === 200) {
+            setLocationData(responsive.data)
+        }
+    }
+
     useEffect(() => {
         search() // eslint-disable-next-line react-hooks/exhaustive-deps
+        searchLocation()
     }, []);
 
     let deleteOrder = async (orderId) => {
         await dispatch(deleteOrderThunk(orderId));
-        dispatch(getOrderThunk());
+        search()
         addToast("Delete Success", { appearance: 'success', autoDismiss: 1000 })
     }
     let routerDetailOrder = (data) => {
         history.push({
             pathname: Routes.OrderDetail.path,
+            state: data
+        })
+    }
+    let routerEditOrder = (data) => {
+        history.push({
+            pathname: Routes.OrderEditUser.path,
             state: data
         })
     }
@@ -66,6 +84,8 @@ export default () => {
                                                 deleteOrder={deleteOrder}
                                                 routerDetailOrder={routerDetailOrder}
                                                 search={search}
+                                                routerEditOrder={routerEditOrder}
+                                                locationData={locationData}
                                             />
                                         )
                                     })}
@@ -100,8 +120,11 @@ export default () => {
 }
 
 
-function TableItem({ index, order, deleteOrder, routerDetailOrder, search }) {
-
+function TableItem({ index, order, deleteOrder, routerDetailOrder, search, routerEditOrder,locationData }) {
+    let city = locationData?.filter(item => item.code == order?.peopleSend?.city)[0]
+    let districtSend = city?.districts?.filter(item => item.code == order?.peopleSend?.district)[0]?.name;
+    let cityRecieve = locationData?.filter(item => item.code == order?.peopleRecieve?.city)[0]
+    let districRecieve = cityRecieve?.districts?.filter(item => item.code == order?.peopleRecieve?.district)[0]?.name;
     return (
         <>
             <tr>
@@ -111,8 +134,12 @@ function TableItem({ index, order, deleteOrder, routerDetailOrder, search }) {
                 <td>
                     <Card.Link href="#" className="text-primary fw-bold">{order?.code}</Card.Link>
                 </td>
-                <td>{order?.peopleSend?.district} - {order.peopleSend?.city}</td>
-                <td>{order.peopleRecieve?.district} - {order.peopleRecieve?.city}</td>
+                <td>
+                    {districtSend} - {city?.name}
+                </td>
+                <td>
+                    {districRecieve} - {cityRecieve?.name}
+                </td>
                 <td>{order.totalPrice}</td>
                 <td>{order.status}</td>
                 <td>{moment(order?.createdAt).format("HH:mm DD-MM-YYYY")}</td>
@@ -126,6 +153,12 @@ function TableItem({ index, order, deleteOrder, routerDetailOrder, search }) {
                         <Dropdown.Menu>
                             <Dropdown.Item onClick={() => routerDetailOrder(order)} >
                                 <FontAwesomeIcon icon={faEye} className="me-2" /> Xem
+                            </Dropdown.Item>
+                            <Dropdown.Item onClick={() => routerEditOrder(order)} >
+                                <FontAwesomeIcon icon={faEdit} className="me-2" /> Sửa
+                            </Dropdown.Item>
+                            <Dropdown.Item className="text-danger" onClick={() => deleteOrder(order._id)}  >
+                                <FontAwesomeIcon icon={faTrashAlt} className="me-2" /> Xóa
                             </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
